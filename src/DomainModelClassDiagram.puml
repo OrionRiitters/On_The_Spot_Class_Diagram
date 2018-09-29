@@ -1,0 +1,67 @@
+@startuml
+
+title <b>On The Spot Courier Services</b>\n<b>Domain Model Class Diagram</b>
+
+class DeliveryInfo {
+    deliveryInvoiceNumber
+    weightAndSize
+    typeOfDelivery
+    timeStamp
+    pickupOrDelivery
+    priority
+    status
+    driver
+    deliveryContact
+    name
+}
+
+class DeliveryContact {
+    destination
+    primaryContact
+    businessOrIndividual
+    phoneNumber
+    pickupAddress
+    deliveryNumber
+}
+
+class RecurringMonthlyStatements {
+    paymentRecordNumber
+    typeOfPayment
+    contactName
+    datesOfPayment
+    amountDue
+    amountPaid
+}
+
+class IndividualInvoices {
+    invoiceNumber
+    typeOfPayment
+    amount
+    contactName
+}
+
+class Employee {
+    employeeNumber
+    name
+    job
+    phoneNumber
+}
+
+class Customer {
+    customerNumber
+    address
+    primaryContact
+    businessOrIndividual
+    phoneNumber
+}
+
+DeliveryInfo "1..*" --- "1" RecurringMonthlyStatements
+DeliveryInfo "1" -- "1" IndividualInvoices
+DeliveryInfo "1..*" -- DeliveryContact
+DeliveryInfo "0..*" - "1..*" Employee
+Customer "1" -- "1" DeliveryContact
+Customer "1" -- "0..*" RecurringMonthlyStatements
+Customer "1" -- "0..*" IndividualInvoices
+
+
+@enduml
