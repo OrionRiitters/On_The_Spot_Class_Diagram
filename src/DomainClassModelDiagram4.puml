@@ -11,6 +11,7 @@ class Package {
     deliveryType
     priority
     status
+    timeAndDateOfOrder
     dropOffContactName
     dropOffContactNumber
 }
@@ -30,15 +31,17 @@ class Invoice {
     customerID
     amountDue
     dueDate
+    paymentDate
+    paymentAmount
 }
 
 class MonthlyInvoice {
     cycleStart
     cycleEnd
+    paymentDate
 }
 
 class IndividualInvoice {
-    paymentType
     invoiceDate
 }
 
@@ -52,19 +55,30 @@ class Customer {
     customerID
     address
     primaryContact
-    businessOrIndividual
     phoneNumber
     paymentInformation
 }
 
+class IndividualCustomer {
+    paymentType
+}
+
+class MonthlyCustomer {
+    lastInvoice
+    lastPayment
+    outstandingBalance
+}
+
 Invoice<|-IndividualInvoice
 Invoice<|--MonthlyInvoice
-IndividualInvoice"0..*"--"1"Customer
+Customer<|--IndividualCustomer
+Customer<|--MonthlyCustomer
+IndividualInvoice"0..*"--"1"IndividualCustomer
 IndividualInvoice"1"--"1"Package
-MonthlyInvoice"0..*"-"1"Customer
+MonthlyInvoice"0..*"-"1"MonthlyCustomer
 MonthlyInvoice"1"--"0..*"Package
 Route"0..*"-"1..2"Driver
-Route"1"--"1..*"Package
+Route"1"-"1..*"Package
 
 hide methods
 

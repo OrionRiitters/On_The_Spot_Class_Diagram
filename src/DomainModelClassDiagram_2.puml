@@ -2,12 +2,13 @@
 
 title <b>On The Spot Courier Services</b>\n<b>Domain Model Class Diagram</b>
 
-class Package{
+class Package {
     packageID
     routeID
     weight
     size
     deliveryType
+    priority
     status
     dropOffContactName
     dropOffContactNumber
@@ -33,7 +34,7 @@ class MonthlyStatement {
     cycleEndDate
 }
 
-class Invoice{
+class Invoice {
     invoiceID
     packageID
     customerID
