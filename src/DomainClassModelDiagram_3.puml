@@ -1,0 +1,70 @@
+@startuml
+
+title <b>On The Spot Courier Services</b>\n<b>Domain Model Class Diagram</b>
+
+class Package{
+    packageID
+    invoiceID
+    routeID
+    weight
+    size
+    deliveryType
+    status
+    dropOffContactName
+    dropOffContactNumber
+}
+
+class Route {
+    routeID
+    pickUpDriverID
+    dropOffDriverID
+    pickUpTime
+    dropOffTime
+    warehousePickUpTime
+    warehouseDropOffTime
+}
+
+class Invoice {
+    invoiceID
+    customerID
+    amountDue
+    dueDate
+}
+
+class MonthlyInvoice {
+    cycleStart
+    cycleEnd
+}
+
+class IndividualInvoice{
+    paymentType
+    invoiceDate
+}
+
+class Driver {
+    driverID
+    phoneNumber
+    name
+}
+
+class Customer {
+    customerID
+    address
+    primaryContact
+    businessOrIndividual
+    phoneNumber
+}
+
+Invoice<|-IndividualInvoice
+Invoice<|--MonthlyInvoice
+IndividualInvoice"0..*"--"1"Customer
+IndividualInvoice"1"--"1"Package
+MonthlyInvoice"0..*"-"1"Customer
+MonthlyInvoice"1"--"0..*"Package
+Route"0..*"-"1..2"Driver
+Route"1"--"1..*"Package
+
+hide methods
+
+
+@enduml
